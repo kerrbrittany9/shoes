@@ -134,5 +134,42 @@
             $test_store_1->delete();
             $this->assertEquals([$test_store_2], Store::getAll());
         }
+
+        function testAddBrand()
+        {
+            $brand_name = "XZ";
+            $price_point = "high";
+            $test_brand = new Brand($brand_name, $price_point);
+            $test_brand->save();
+
+            $store_name = "The Shoe Store";
+            $test_store = new Store($store_name);
+            $test_store->save();
+
+            $test_store->addBrand($test_brand);
+            $this->assertEquals($test_store->getBrands(), [$test_brand]);
+        }
+        function testGetBrands()
+        {
+            $brand_name = "Gucci";
+            $price_point = "high";
+            $test_brand = new Brand($brand_name, $price_point);
+            $test_brand->save();
+
+            $brand_name_2 = "Target Brands";
+            $price_point_2 = "low";
+            $test_brand_2 = new Brand($brand_name_2, $price_point_2);
+            $test_brand_2->save();
+
+            $store_name = "YOOx";
+            $test_store = new Store($store_name);
+            $test_store->save();
+
+            $test_store->addBrand($test_brand);
+            $test_store->addBrand($test_brand_2);
+            
+            $this->assertEquals($test_store->getBrands(), [$test_brand, $test_brand_2]);
+        }
+
     }
 ?>
