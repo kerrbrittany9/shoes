@@ -43,5 +43,17 @@
             $executed = $test_store->save();
             $this->assertTrue($executed, "Store not successfully saved to database");
         }
+
+
+        function testGetId()
+        {
+            $store_name = "Shoes and Stuff";
+            $test_store = new Store($store_name);
+            $test_store->save();
+            
+            $result = $test_store->getId();
+
+            $this->assertEquals(true, is_numeric($result));
+        }
     }
 ?>
