@@ -30,15 +30,16 @@
 
                         <h2>Add A Brand</h2>
                         <form action="/add_brand" name="add_brand" method="post">
-                             <label for="brand_name">Add A Brand: </label>
-                             <input type="brand_name" name="brand_name" type="text" required>
-
-                             <button type="submit" name="button">Add</button>
+                            <label for="brand_name">Add A Brand: </label>
+                            <input type="brand_name" name="brand_name" type="text" required><br>
+                            <label for="price_point">Add A Price Point: Low / Medium / High</label>
+                            <input type="price_point" name="price_point" type="text" required>
+                            <button type="submit" name="button">Add</button>
                         </form>
                         <h2>View All Brands</h2>
                             {% if all_brands is not empty %}
                                 {% for brand in all_brands %}
-                                    <p><a href="/edit_brand/{{ brand.getId }}">{{ brand.getBrandName }}</a></p>
+                                    <p>{{ brand.getBrandName }} | Price point:  {{ brand.getPricePoint }}</p>
                                 {% endfor %}
                             {% endif %}
                     </div>

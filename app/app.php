@@ -24,22 +24,20 @@
     Request::enableHttpMethodParameterOverride();
 
     $app->get("/", function() use ($app) {
-        return $app['twig']->render('index.html.twig', array('all_stores' => Store::getAll()));
+        return $app['twig']->render('index.html.twig', array('all_stores' => Store::getAll(), 'all_brands' => Brand::getAll()));
     });
 
-
     $app->post("/", function() use ($app) {
-      $store_name = $_POST['store_name'];
-      $new_store = new Store($store_name);
-      $new_store->save();
-      return $app['twig']->render('index.html.twig', array('all_stores' => Store::getAll()));
+        $store_name = $_POST['store_name'];
+        $new_store = new Store($store_name);
+        $new_store->save();
+        return $app['twig']->render('index.html.twig', array('all_stores' => Store::getAll(), 'all_brands' => Brand::getAll()));
     });
 
     $app->get("/edit_store/{id}", function($id) use ($app) {
         $store = Store::find($id);
         return $app['twig']->render('edit_store.html.twig', array('store' => $store, 'inventory' => $store->getBrands(), 'all_brands' => Brand::getAll()));
     });
-
 
     $app->patch("/edit_store/{id}", function($id) use ($app) {
         $store_name  = $_POST['store_name'];
@@ -51,7 +49,7 @@
     $app->post("/assign_brand/{id}", function($id) use ($app) {
         $store = Store::find($id);
         $brand = Brand::find($_POST['all_brands']);
-        $store->addAuthor($brand);
+        $store->addBrand($brand);
         return $app['twig']->render('edit_store.html.twig', array('store' => $store, 'all_brands' => Brand::getAll(), 'inventory' => $store->getBrands()));
     });
 
@@ -61,6 +59,14 @@
         return $app['twig']->render('index.html.twig', array('all_stores' => Store::getAll()));
     });
 
+
+    $app->post("/add_brand", function() use ($app) {
+        $brand_name = $_POST['brand_name'];
+        $price_point = $_POST['price_point'];
+        $new_brand = new Brand($brand_name, $price_point);
+        $new_brand->save();
+        return $app['twig']->render('index.html.twig', array('all_stores' => Store::getAll(), 'all_brands' => Brand::getAll()));
+    });
     return $app;
 
 ?>
