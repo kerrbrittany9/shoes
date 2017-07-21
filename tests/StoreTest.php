@@ -16,6 +16,7 @@
         protected function tearDown()
         {
             Store::deleteAll();
+        
         }
 
         function testGetStoreName()

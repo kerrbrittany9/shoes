@@ -34,5 +34,11 @@
       return $app['twig']->render('index.html.twig', array('all_stores' => Store::getAll()));
     });
 
+    $app->get("/edit_store/{id}", function($id) use ($app) {
+       $store = Store::find($id);
+       return $app['twig']->render('edit_store.html.twig', array('store' => $store, , 'store_authors' => $store->getBrands()));
+   });
+   // 'all_brands' => Brand::getAll()
+
     return $app;
 ?>
