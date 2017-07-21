@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <title>Szappos | Home</title>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="container main">
+                <div class="row">
+                    <h1>Welcome to Sxappos | Catalog</h1>
+                    <div class="col-md-6">
+
+                        <h2>Add A Store</h2>
+                        <form action="/" name="add_store" method="post">
+                            <label for="store_name">Add A Store: </label>
+                            <input type="store_name" name="store_name" type="text" required>
+
+                            <button type="submit" name="button">Add</button>
+                        </form>
+
+                        <h2>View All Stores</h2>
+                        {% if all_stores is not empty %}
+                            {% for store in all_stores %}
+                                <p><a href="/edit_store/{{ store.getId }}">{{ store.getStoreName }}</a></p>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
