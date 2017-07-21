@@ -18,6 +18,28 @@
         {
             $this->brand_name = (string) $new_brand_name;
         }
+        function getPricePoint()
+        {
+            return $this->price_point;
+        }
+
+        function setPricePoint($new_price_point)
+        {
+            $this->price_point = (string) $new_price_point;
+        }
+
+        function save()
+        {
+            $executed = $GLOBALS['DB']->exec("INSERT INTO brands (brand_name) VALUES ('{$this->getBrandName()}')");
+            if ($executed) {
+                $this->id = $GLOBALS['DB']->lastInsertId();
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+
 
     }
 ?>

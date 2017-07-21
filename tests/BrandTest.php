@@ -19,7 +19,9 @@
             $brand_name = "Keds";
             $price_point = "low";
             $test_brand = new Brand($brand_name, $price_point);
+
             $result = $test_brand->getBrandName();
+
             $this->assertEquals($brand_name, $result);
         }
 
@@ -27,13 +29,23 @@
         {
             $brand_name = "Asics";
             $price_point = "medium";
-            $test_book = new Brand($brand_name, $price_point);
+            $test_brand = new Brand($brand_name, $price_point);
             $new_brand_name = "Asics Plus";
 
-            $test_book->setBrandName($new_brand_name);
+            $test_brand->setBrandName($new_brand_name);
 
-            $result = $test_book->getBrandName();
+            $result = $test_brand->getBrandName();
             $this->assertEquals($new_brand_name, $result);
+        }
+
+        function testSave()
+        {
+            $brand_name = "Tigers";
+            $price_point = "medium";
+            $test_brand = new Brand($brand_name, $price_point);
+            $executed = $test_brand->save();
+
+            $this->assertTrue($executed, "Brand not successfully saved to database");
         }
     }
 ?>
