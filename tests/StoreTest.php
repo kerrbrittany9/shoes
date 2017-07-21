@@ -35,5 +35,13 @@
 
             $this->assertEquals($new_store_name, $result);
         }
+
+        function testSave()
+        {
+            $store_name = "The Shoe depot";
+            $test_store = new Store($store_name);
+            $executed = $test_store->save();
+            $this->assertTrue($executed, "Store not successfully saved to database");
+        }
     }
 ?>

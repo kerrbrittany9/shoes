@@ -18,6 +18,16 @@
             $this->store_name = (string) $new_store_name;
         }
 
+        function save()
+        {
+            $executed = $GLOBALS['DB']->exec("INSERT INTO stores (store_name) VALUES ('{$this->getStoreName()}')");
+            if ($executed) {
+                $this->id = $GLOBALS['DB']->lastInsertId();
+                return true;
+            } else {
+                return false;
+            }
+        }
 
 
     }
