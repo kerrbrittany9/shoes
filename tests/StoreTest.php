@@ -75,7 +75,7 @@
 
             $this->assertEquals([$test_store_1, $test_store_2], $result);
         }
-        
+
         function testDeleteAll()
         {
             $store_name_1 = "Shoes Beyonce Wore";
@@ -91,5 +91,21 @@
 
             $this->assertEquals([], $result);
         }
+
+        function testFind()
+        {
+            $store_name_1 = "Shoe Depot";
+            $test_store_1 = new Store($store_name_1);
+            $test_store_1->save();
+
+            $store_name_2 = "Shoes and Stuff";
+            $test_store_2 = new Store($store_name_2);
+            $test_store_2->save();
+
+            $result = Store::find($test_store_2->getId());
+
+            $this->assertEquals($test_store_2, $result);
+        }
+
     }
 ?>

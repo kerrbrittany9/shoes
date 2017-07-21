@@ -47,10 +47,26 @@
             }
             return $stores;
         }
-        
+
         static function deleteAll()
         {
             $GLOBALS['DB']->exec("DELETE FROM stores;");
+        }
+
+
+        static function find($search_id)
+        {
+            $returned_stores = $GLOBALS['DB']->prepare("SELECT * FROM stores WHERE id = :id");
+            $returned_stores->bindParam(':id', $search_id, PDO::PARAM_STR);
+            $returned_stores->execute();
+            foreach ($returned_stores as $store) {
+                $store_name = $store['store_name'];
+                $store_id = $store['id'];
+                if ($store_id == $search_id) {
+                    $returned_store = new Store($store_name, $store_id);
+                }
+            }
+            return $returned_store;
         }
 
 
