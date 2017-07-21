@@ -47,5 +47,17 @@
 
             $this->assertTrue($executed, "Brand not successfully saved to database");
         }
+
+        function testGetId()
+        {
+            $brand_name = "Gucci";
+            $price_point = "high";
+            $test_brand = new Brand($brand_name, $price_point);
+            $test_brand->save();
+
+            $result = $test_brand->getId();
+
+            $this->assertEquals(true, is_numeric($result));
+        }
     }
 ?>
