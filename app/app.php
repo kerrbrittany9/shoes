@@ -1,6 +1,9 @@
 <?php
+
+    date_default_timezone_set('America/Los_Angeles');
     require_once __DIR__."/../vendor/autoload.php";
     require_once __DIR__."/../src/Store.php";
+    require_once __DIR__."/../src/Brand.php";
 
 
     $server = 'mysql:host=localhost:8889;dbname=shoes';
@@ -36,9 +39,10 @@
 
     $app->get("/edit_store/{id}", function($id) use ($app) {
        $store = Store::find($id);
-       return $app['twig']->render('edit_store.html.twig', array('store' => $store, , 'store_authors' => $store->getBrands()));
+       return $app['twig']->render('edit_store.html.twig', array('store' => $store, 'store_authors' => $store->getBrands()));
    });
    // 'all_brands' => Brand::getAll()
 
     return $app;
+
 ?>

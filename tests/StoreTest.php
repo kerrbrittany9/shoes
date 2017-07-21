@@ -167,7 +167,7 @@
 
             $test_store->addBrand($test_brand);
             $test_store->addBrand($test_brand_2);
-            
+
             $this->assertEquals($test_store->getBrands(), [$test_brand, $test_brand_2]);
         }
 

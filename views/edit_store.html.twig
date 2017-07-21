@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <title>Szappos | Edit Store</title>
+    </head>
+    <body>
+        <h1>Szappos| Edit Store</h1>
+
+        <h2>{{ store.getStoreName }} - Authors</h2>
+        {% if inventory is not empty %}
+            {% for brand in inventory %}
+                <p>{{ brand.getBrandName }}</p>
+            {% endfor %}
+        {% endif %}
+
+
+        <h2>Edit Store Information</h2>
+        <form action="/edit_store/{{ store.getId }}" name="edit_store" method="post">
+            <input name="_method" type="hidden" value="patch">
+
+            <label for="store_name">New Store Name: </label>
+            <input type="store_name" name="store_name" type="text" required>
+
+            <button type="submit" name="button">Update</button>
+        </form>
+
+        <h2>Add brands to this store.</h2> <!-- needs to be dropdown menu -->
+        <form action="/assign_brand/{{ store.getId }}" name="assign_brand" method="post">
+            <label for="all_brands">Add A Brand: </label>
+            <!-- <input type="brand_name" name="brand_name" type="text" required> -->
+            <select name="all_brands">
+                {% for brand in all_brands %}
+                    <option value="{{ brand.getId }}">{{ brand.getBrandName }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit" name="button">Add Brand</button>
+        </form>
+
+        <form action="/delete_store/{{ store.getId }}" method="post">
+            <input name="_method" type="hidden" value="delete">
+
+            <button type="submit">Delete</button>
+        </form>
+    <p><a href="/">Home</a></p>
+    </body>
+</html>
