@@ -22,5 +22,18 @@
             $result = $test_brand->getBrandName();
             $this->assertEquals($brand_name, $result);
         }
+
+        function testSetBrandName()
+        {
+            $brand_name = "Asics";
+            $price_point = "medium";
+            $test_book = new Brand($brand_name, $price_point);
+            $new_brand_name = "Asics Plus";
+
+            $test_book->setBrandName($new_brand_name);
+
+            $result = $test_book->getBrandName();
+            $this->assertEquals($new_brand_name, $result);
+        }
     }
 ?>
