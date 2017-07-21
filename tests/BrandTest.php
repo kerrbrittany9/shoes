@@ -14,6 +14,13 @@
 
     class BrandTest extends PHPUnit_Framework_TestCase
     {
+        protected function tearDown()
+        {
+            Brand::deleteAll();
+            Store::deleteAll();
+
+        }
+
         function testGetBrandName()
         {
             $brand_name = "Keds";
@@ -59,5 +66,39 @@
 
             $this->assertEquals(true, is_numeric($result));
         }
+
+        function testGetAll()
+        {
+            $brand_name_1 = "Nike";
+            $price_point_1 = "high";
+            $test_brand_1 = new Brand($brand_name_1, $price_point_1);
+            $test_brand_1->save();
+
+            $brand_name_2 = "addidas";
+            $price_point_2 = "medium";
+            $test_brand_2 = new Brand($brand_name_2, $price_point_2);
+            $test_brand_2->save();
+
+            $result = Brand::getAll();
+            $this->assertEquals([$test_brand_1, $test_brand_2], $result);
+        }
+
+        function testDeleteAll()
+        {
+            $brand_name_1 = "Minolos";
+            $price_point_1 = "high";
+            $test_brand_1 = new Brand($brand_name_1, $price_point_1);
+            $test_brand_1->save();
+
+            $brand_name_2 = "Converse";
+            $price_point_2 = "medium";
+            $test_brand_2 = new Brand($brand_name_2, $price_point_2);
+            $test_brand_2->save();
+
+            Brand::deleteAll();
+            $result = Brand::getAll();
+            $this->assertEquals([], $result);
+        }
+
     }
 ?>

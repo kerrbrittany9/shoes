@@ -44,6 +44,24 @@
             return $this->id;
         }
 
+        static function getAll()
+        {
+            $returned_brands = $GLOBALS['DB']->query("SELECT * FROM brands");
+            $brands = array();
+            foreach($returned_brands as $brand) {
+                $brand_name = $brand['brand_name'];
+                $price_point = $brand['price_point'];
+                $brand_id = $brand['id'];
+                $new_brand = new Brand($brand_name, $price_point, $brand_id);
+                array_push($brands, $new_brand);
+            }
+            return $brands;
+        }
+
+        static function deleteAll()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM brands;");
+        }
 
 
     }
