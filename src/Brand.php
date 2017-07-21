@@ -67,6 +67,21 @@
             $GLOBALS['DB']->exec("DELETE FROM brands;");
         }
 
+        static function find($search_id)
+        {
+            $returned_brands = $GLOBALS['DB']->prepare("SELECT * FROM brands WHERE id = :id");
+            $returned_brands->bindParam(':id', $search_id, PDO::PARAM_STR);
+            $returned_brands->execute();
+            foreach ($returned_brands as $brand) {
+                $brand_name = $brand['brand_name'];
+                $price_point = $brand['price_point'];
+                $brand_id = $brand['id'];
+                if ($brand_id == $search_id) {
+                    $returned_brand = new Brand($brand_name, $price_point, $brand_id);
+                }
+            }
+            return $returned_brand;
+        }
 
         // function addStore($store)
         // {

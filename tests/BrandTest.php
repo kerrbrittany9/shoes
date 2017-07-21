@@ -98,7 +98,24 @@
             $result = Brand::getAll();
             $this->assertEquals([], $result);
         }
-        // 
+
+
+        function testFind()
+        {
+            $brand_name_1 = "The Feet Covers";
+            $price_point_1 = "low";
+            $test_brand_1 = new Brand($brand_name_1, $price_point_1);
+            $test_brand_1->save();
+
+            $brand_name_2 = "Sole Food";
+            $price_point_2 = "high";
+            $test_brand_2 = new Brand($brand_name_2, $price_point_2);
+            $test_brand_2->save();
+            $result = Brand::find($test_brand_2->getId());
+            $this->assertEquals($test_brand_2, $result);
+        }
+
+        //
         // function testAddStore()
         // {
         //     $store_name = "Shoes";

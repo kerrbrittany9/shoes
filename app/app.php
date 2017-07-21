@@ -13,9 +13,7 @@
 
     use Symfony\Component\Debug\Debug;
     Debug::enable();
-
     $app = new Silex\Application();
-
     $app['debug'] = true;
 
     $app->register(new Silex\Provider\TwigServiceProvider(), array(
@@ -28,7 +26,7 @@
     $app->get("/", function() use ($app) {
         return $app['twig']->render('index.html.twig', array('all_stores' => Store::getAll()));
     });
-    // 'all_brands' => Brand::getAll()
+
 
     $app->post("/", function() use ($app) {
       $store_name = $_POST['store_name'];
@@ -38,10 +36,24 @@
     });
 
     $app->get("/edit_store/{id}", function($id) use ($app) {
-       $store = Store::find($id);
-       return $app['twig']->render('edit_store.html.twig', array('store' => $store, 'store_authors' => $store->getBrands()));
-   });
-   // 'all_brands' => Brand::getAll()
+        $store = Store::find($id);
+        return $app['twig']->render('edit_store.html.twig', array('store' => $store, 'inventory' => $store->getBrands(), 'all_brands' => Brand::getAll()));
+    });
+
+
+    $app->patch("/edit_store/{id}", function($id) use ($app) {
+        $store_name  = $_POST['store_name'];
+        $store = Store::find($id);
+        $store->updateStoreName($store_name);
+        return $app['twig']->render('edit_store.html.twig', array('store' => $store, 'all_brands' => Brand::getAll(), 'inventory' => $store->getBrands()));
+    });
+
+    $app->post("/assign_brand/{id}", function($id) use ($app) {
+        $store = Store::find($id);
+        $brand = Brand::find($_POST['all_brands']);
+        $store->addAuthor($brand);
+        return $app['twig']->render('edit_store.html.twig', array('store' => $store, 'all_brands' => Brand::getAll(), 'inventory' => $store->getBrands()));
+    });
 
     return $app;
 
