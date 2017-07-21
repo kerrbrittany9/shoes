@@ -23,5 +23,17 @@
 
             $this->assertEquals($store_name, $result);
         }
+
+        function testsetStoreName()
+        {
+            $store_name = "Niketown";
+            $test_store = new Store($store_name);
+            $new_store_name = "NickTown";
+
+            $test_store->setStoreName($new_store_name);
+            $result = $test_store->getStoreName();
+
+            $this->assertEquals($new_store_name, $result);
+        }
     }
 ?>

@@ -12,5 +12,13 @@
         {
             return $this->store_name;
         }
+
+        function setStoreName($new_store_name)
+        {
+            $this->store_name = (string) $new_store_name;
+        }
+
+
+
     }
 ?>
