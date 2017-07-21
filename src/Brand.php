@@ -64,5 +64,29 @@
         }
 
 
+        function addStore($store)
+        {
+            $executed = $GLOBALS['DB']->exec("INSERT INTO inventory (brand_id, store_id) VALUES ({$this->getId()}, {$store->getId()});");
+            if ($executed) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function getStores()
+        {
+            $returned_stores = $GLOBALS['DB']->query("SELECT stores.* FROM brands JOIN inventory ON (inventory.brand_id = brands.id) JOIN stores ON (stores.id = inventory.store_id) WHERE brands.id = {$this->getId()};");
+            $stores = array();
+            foreach($returned_stores as $store) {
+                $store_name = $store['store_name'];
+                $store_id = $store['id'];
+                $new_store = new Store($store_name, $store_id);
+                array_push($stores, $new_store);
+        
+            }
+            return $stores;
+        }
+
     }
 ?>

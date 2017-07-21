@@ -110,6 +110,7 @@
                 $brand_id = $brand['id'];
                 $new_brand = new Brand($brand_name, $price_point, $brand_id);
                 array_push($brands, $new_brand);
+    
             }
             return $brands;
         }
