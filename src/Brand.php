@@ -22,6 +22,7 @@
             $this->brand_name = (string) $new_brand_name;
         }
 
+
         function getPricePoint()
         {
             return $this->price_point;
