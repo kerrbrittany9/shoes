@@ -67,6 +67,11 @@
         $new_brand->save();
         return $app['twig']->render('index.html.twig', array('all_stores' => Store::getAll(), 'all_brands' => Brand::getAll()));
     });
+
+    $app->get("/edit_brand/{id}", function($id) use ($app) {
+        $brand = Brand::find($id);
+        return $app['twig']->render('edit_brand.html.twig', array('brand' => $brand, 'brand_store' => $brand->getBrands(), 'all_brands' => Store::getAll()));
+    });
     return $app;
 
 ?>
