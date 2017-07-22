@@ -1,4 +1,5 @@
 <?php
+
     /**
     * @backupGlobals disabled
     * @backupStaticAttributes disabled
@@ -150,11 +151,33 @@
             $test_brand->addStore($test_store_1);
             $test_brand->addStore($test_store_2);
 
-            
+
             $this->assertEquals($test_brand->getStores(), [$test_store_1, $test_store_2]);
         }
 
+        function testMakeTitleCaseForOneWord()
+        {
+            $brand_name = "fendi";
+            $price_point = "high";
+            $test_brand_name = new Brand($brand_name, $price_point);
+            $test_brand_name->save();
 
+            $result = $test_brand_name->makeTitleCase($brand_name);
+
+            $this->assertEquals("Fendi", $result);
+        }
+
+        function testMakeTitleCaseForMultipleWords()
+        {
+            $brand_name = "cole haan";
+            $price_point = "high";
+            $test_brand_name = new Brand($brand_name, $price_point);
+            $test_brand_name->save();
+
+            $result = $test_brand_name->makeTitleCase($brand_name);
+
+            $this->assertEquals("Cole Haan", $result);
+        }
 
     }
 ?>
