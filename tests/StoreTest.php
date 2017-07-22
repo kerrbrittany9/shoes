@@ -171,5 +171,26 @@
             $this->assertEquals($test_store->getBrands(), [$test_brand, $test_brand_2]);
         }
 
+        function testMakeTitleCaseForOneWord()
+        {
+            $store_name = "shooed";
+            $test_store_name = new Store($store_name);
+            $test_store_name->save();
+
+            $result = $test_store_name->makeTitleCase($store_name);
+
+            $this->assertEquals("Shooed", $result);
+        }
+
+        function testMakeTitleCaseForMultipleWords()
+        {
+            $store_name = "stinky shoes";
+            $test_store_name = new Store($store_name);
+            $test_store_name->save();
+
+            $result = $test_store_name->makeTitleCase($store_name);
+
+            $this->assertEquals("Stinky Shoes", $result);
+        }
     }
 ?>

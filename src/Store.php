@@ -117,6 +117,16 @@
             return $brands;
         }
 
+        function makeTitleCase($store_name)
+        {
+            $store_name_array = explode(" ", $store_name);
+            $output_titlecased = array();
+            foreach ($store_name_array as $word) {
+                array_push($output_titlecased, ucfirst($word));
+            }
+            return implode(" ", $output_titlecased);
+        }
+
 
     }
 ?>
