@@ -179,5 +179,23 @@
             $this->assertEquals("Cole Haan", $result);
         }
 
+
+        function testFindDuplicateBrand()
+        {
+            $brand_name_1 = "Addidas";
+            $price_point_1 = "medium";
+            $test_brand_1 = new Brand($brand_name_1, $price_point_1);
+            $test_brand_1->save();
+
+            $brand_name_2 = "Happy Feet";
+            $price_point_2 = "medium";
+            $test_brand_2 = new Brand($brand_name_2, $price_point_2);
+            $test_brand_2->save();
+
+            $result = Brand::findDuplicateBrand($test_brand_2->getBrandName());
+
+            $this->assertEquals($test_brand_2, $result);
+        }
+
     }
 ?>

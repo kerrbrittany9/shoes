@@ -118,5 +118,21 @@
             }
             return implode(" ", $output_titlecased);
         }
+
+        static function findDuplicateBrand($search_brand_name)
+        {
+            $returned_brands = $GLOBALS['DB']->prepare("SELECT * FROM brands WHERE brand_name = :brand_name");
+            $returned_brands->bindParam(':brand_name', $search_brand_name, PDO::PARAM_STR);
+            $returned_brands->execute();
+            foreach ($returned_brands as $brand) {
+                $brand_name = $brand['brand_name'];
+                $price_point = $brand['price_point'];
+                $brand_id = $brand['id'];
+                if ($brand_name == $search_brand_name) {
+                    $returned_brand = new Brand($brand_name, $price_point, $brand_id);
+                }
+            }
+            return $returned_brand;
+        }
     }
 ?>
