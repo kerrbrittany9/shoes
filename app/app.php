@@ -77,13 +77,13 @@
 
     $app->get("/edit_brand/{id}", function($id) use ($app) {
         $brand = Brand::find($id);
-        return $app['twig']->render('edit_brand.html.twig', array('brand' => $brand, 'brand_stores' => $brand->getStores(), 'all_brands' => Store::getAll()));
+        return $app['twig']->render('edit_brand.html.twig', array('brand' => $brand, 'brand_stores' => $brand->getStores(), 'all_stores' => Store::getAll(), 'all_brands' => Store::getAll()));
     });
 
     $app->post("/assign_store/{id}", function($id) use ($app) {
         $brand= Brand::find($id);
         $store = Store::find($_POST['all_stores']);
-        $brand->addBrand($store);
+        $brand->addStore($store);
         return $app['twig']->render('edit_brand.html.twig', array('brand' => $brand, 'all_stores' => Store::getAll(), 'brand_stores' => $brand->getStores()));
     });
 
