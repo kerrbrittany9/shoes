@@ -44,9 +44,8 @@
 
     $app->patch("/edit_store/{id}", function($id) use ($app) {
         $store_name  = $_POST['store_name'];
-        $new_store = Store::find($id);
-        $title_case_store = $new_store->makeTitleCase($store_name);
-        $new_store->setStoreName($title_case_store);
+        $store = Store::find($id);
+        $title_case_store = $store->makeTitleCase($store_name);
         $store->updateStoreName($title_case_store);
 
         return $app['twig']->render('edit_store.html.twig', array('store' => $store, 'all_brands' => Brand::getAll(), 'inventory' => $store->getBrands()));
