@@ -20,10 +20,10 @@
 
 
 
-                <h2>Add brands to this brand.</h2>
-                <form action="/assign_store/{{ brand.getId }}" name="assign_brand" method="post">
-                    <label for="all_stores">Add A Store: </label>
-                    <select name="all_stores">
+                <h2>Add stores that carry this brand.</h2>
+                <form action="/assign_store/{{ brand.getId }}" name="assign_store" method="post">
+                    <label for='all_stores'>Add A Store: </label>
+                    <select name='all_stores'>
                         {% for store in all_stores %}
                             <option value="{{ store.getId }}">{{ store.getStoreName }}</option>
                         {% endfor %}
