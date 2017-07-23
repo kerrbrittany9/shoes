@@ -135,11 +135,11 @@
 
         function testGetStores()
         {
-            $store_name_1 = "G.G.";
+            $store_name_1 = "Good Feet";
             $test_store_1 = new Store($store_name_1);
             $test_store_1->save();
 
-            $store_name_2 = "Isabel's";
+            $store_name_2 = "Shoe Palace";
             $test_store_2 = new Store($store_name_2);
             $test_store_2->save();
 

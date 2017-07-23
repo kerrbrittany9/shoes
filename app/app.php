@@ -79,7 +79,7 @@
         $brand->addBrand($store);
         return $app['twig']->render('edit_store.html.twig', array('store' => $store, 'all_stores' => Store::getAll(), 'brand_stores' => $brand->getStores()));
     });
-    
+
     return $app;
 
 ?>

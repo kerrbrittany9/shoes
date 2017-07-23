@@ -104,7 +104,7 @@
                 $new_store = new Store($store_name, $store_id);
                 array_push($stores, $new_store);
 
-                var_dump($stores);
+
             }
             return $stores;
         }
